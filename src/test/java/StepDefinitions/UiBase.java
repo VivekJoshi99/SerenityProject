@@ -6,10 +6,10 @@ import net.thucydides.model.util.EnvironmentVariables;
 
 public class UiBase {
     public static EnvironmentVariables environmentVariables;
-    //public static String baseUrl;
+    public static String baseUrl;
     static {
         environmentVariables = ConfiguredEnvironment.getEnvironmentVariables();
         environmentVariables.getKeys().forEach(key -> System.out.println(key + ": " + environmentVariables.getProperty(key)));
-       // baseUrl = EnvironmentSpecificConfiguration.from(environmentVariables).getProperty("base.url");
+        baseUrl = EnvironmentSpecificConfiguration.from(environmentVariables).getProperty("webdriver.base.url");
     }
 }
