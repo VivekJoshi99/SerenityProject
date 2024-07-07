@@ -19,6 +19,7 @@ Feature: Automation the functionality of booking an online ticket
     Then the PDF should contain the expected timetable information
     And I delete the downloaded PDF file
 
+  @smoke
   Scenario: Book an Online ticket for future customizable date
     Given I navigate to the ERAIL website
     When I enter "Delhi" as the source station

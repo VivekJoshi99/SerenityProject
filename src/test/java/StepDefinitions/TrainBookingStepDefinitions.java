@@ -1,30 +1,28 @@
 package StepDefinitions;
 
+import Pages.TrainBookingPageObjects;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.actions.OpenUrl;
 
-import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static HelperMethods.Helper.getActor;
 
 public class TrainBookingStepDefinitions extends UiBase {
-    Actor actor = theActorInTheSpotlight();
-    String baseUrl = "https://erail.in/";
-
     @Given("I navigate to the ERAIL website")
     public void i_navigate_to_the_erail_website() {
-        actor.attemptsTo(new OpenUrl(baseUrl));
+        getActor().attemptsTo(new OpenUrl(baseUrl));
     }
 
     @When("I enter {string} as the source station")
-    public void iEnterAsTheSourceStation(String arg0) {
-
+    public void iEnterAsTheSourceStation(String from) {
+        TrainBookingPageObjects.enterFromStation(getActor(),from);
     }
 
     @And("I enter {string} as the destination station")
-    public void iEnterAsTheDestinationStation(String arg0) {
+    public void iEnterAsTheDestinationStation(String to) {
+        TrainBookingPageObjects.enterToStation(getActor(), to);
     }
 
     @Given("I have searched for trains between {string} and {string}")

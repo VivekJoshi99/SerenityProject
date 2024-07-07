@@ -12,29 +12,12 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <serenity.version>4.1.14</serenity.version>
-    <cucumber.version>7.18.0</cucumber.version>
-    <junit.version>5.10.2</junit.version>
+    <serenity.version>4.1.12</serenity.version>
+    <encoding>UTF-8</encoding>
+    <serenity.test.root></serenity.test.root>
+    <tags></tags>
   </properties>
-
   <dependencies>
-    <!-- JUnit 5 dependencies -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-    <!-- Serenity dependencies -->
     <dependency>
       <groupId>net.serenity-bdd</groupId>
       <artifactId>serenity-core</artifactId>
@@ -42,9 +25,28 @@
     </dependency>
     <dependency>
       <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-junit</artifactId>
+      <version>${serenity.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
       <artifactId>serenity-junit5</artifactId>
       <version>${serenity.version}</version>
-      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-screenplay</artifactId>
+      <version>${serenity.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-screenplay-webdriver</artifactId>
+      <version>${serenity.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.serenity-bdd</groupId>
+      <artifactId>serenity-ensure</artifactId>
+      <version>${serenity.version}</version>
     </dependency>
     <dependency>
       <groupId>net.serenity-bdd</groupId>
@@ -52,45 +54,92 @@
       <version>${serenity.version}</version>
     </dependency>
     <dependency>
-      <groupId>net.serenity-bdd</groupId>
-      <artifactId>serenity-ensure</artifactId>
-      <version>${serenity.version}</version>
-      <scope>test</scope>
-    </dependency>
-
-    <!-- Cucumber dependencies -->
-    <dependency>
-      <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-java</artifactId>
-      <version>${cucumber.version}</version>
+      <groupId>org.junit.platform</groupId>
+      <artifactId>junit-platform-launcher</artifactId>
+      <version>1.10.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-junit-platform-engine</artifactId>
-      <version>${cucumber.version}</version>
+      <version>7.13.0</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- SLF4J dependency -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>2.0.13</version>
-      <scope>test</scope>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-suite-api -->
     <dependency>
       <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-suite-api</artifactId>
-      <version>1.10.2</version>
+      <artifactId>junit-platform-suite</artifactId>
+      <version>1.10.0</version>
       <scope>test</scope>
     </dependency>
-  </dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.10.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>5.10.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.10</version>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.22.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.opentest4j</groupId>
+      <artifactId>opentest4j</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1.1</version>
+    </dependency>
 
+  </dependencies>
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version>
+        <configuration>
+          <includes>
+            <include>**/TestRunnerSerenity/*.java</include>
+          </includes>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <includes>
+            <include>**/TestRunnerSerenity/*.java</include>
+          </includes>
+          <excludes>
+            <exclude>**/*WithFailures.java</exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -104,6 +153,9 @@
         <groupId>net.serenity-bdd.maven.plugins</groupId>
         <artifactId>serenity-maven-plugin</artifactId>
         <version>${serenity.version}</version>
+        <configuration>
+          <tags>${tags}</tags>
+        </configuration>
         <executions>
           <execution>
             <id>serenity-reports</id>
@@ -112,44 +164,71 @@
               <goal>aggregate</goal>
             </goals>
           </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
-        <configuration>
-          <includes>
-            <include>**/TestRunnerSerenity*.java</include>
-          </includes>
-          <systemPropertyVariables>
-            <serenity.project.key>SerenityProject</serenity.project.key>
-            <serenity.outputDirectory>${project.build.directory}/site/serenity</serenity.outputDirectory>
-          </systemPropertyVariables>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.0.0-M5</version>
-        <configuration>
-          <includes>
-            <include>**/TestRunnerSerenity*.java</include>
-          </includes>
-          <systemPropertyVariables>
-            <serenity.project.key>SerenityProject</serenity.project.key>
-            <serenity.outputDirectory>${project.build.directory}/site/serenity</serenity.outputDirectory>
-          </systemPropertyVariables>
-        </configuration>
-        <executions>
           <execution>
+            <id>check-gherkin</id>
+            <phase>process-test-resources</phase>
             <goals>
-              <goal>integration-test</goal>
-              <goal>verify</goal>
+              <goal>check-gherkin</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>localhost</id>
+      <properties>
+        <webdriver.base.url>http://localhost:8080/angularjs/#/</webdriver.base.url>
+      </properties>
+    </profile>
+    <profile>
+      <id>failing</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>3.3.0</version>
+            <configuration>
+              <includes>
+                <include>**/*WithFailures.java</include>
+              </includes>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>cucumber</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <version>3.3.0</version>
+            <configuration>
+              <includes>
+                <include>**/CucumberTestSuite.java</include>
+              </includes>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
