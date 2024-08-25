@@ -17,6 +17,7 @@ public class TrainBookingStepDefinitions extends UiBase {
 
     @When("I enter {string} as the source station")
     public void iEnterAsTheSourceStation(String from) {
+        System.out.println("Actor: " + getActor().getName() + " is entering source station: " + from);
         TrainBookingPageObjects.enterFromStation(getActor(),from);
     }
 
@@ -66,8 +67,10 @@ public class TrainBookingStepDefinitions extends UiBase {
     }
 
     @When("I enter {string} as booking date")
-    public void i_enter_as_booking_date(String string) {
-        
+    public void i_enter_as_booking_date(String date) {
+        int day = Integer.parseInt(date.substring(0, date.indexOf('-')));
+        String month = date.substring(date.indexOf('-') + 1);
+        TrainBookingPageObjects.enterBookingDate(getActor(), month, day);
     }
 
     @When("I select {string} as Quota")

@@ -14,6 +14,7 @@ public class Hooks {
     public void SetUP(){
         OnStage.setTheStage(new OnlineCast());
         OnStage.theActorCalled("John");
+        System.out.println("Actor: " + getActor().getName() + " is entering source station: ");
     }
 
     @After

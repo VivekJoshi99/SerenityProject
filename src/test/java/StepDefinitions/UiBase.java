@@ -9,7 +9,7 @@ public class UiBase {
     public static String baseUrl;
     static {
         environmentVariables = ConfiguredEnvironment.getEnvironmentVariables();
-        environmentVariables.getKeys().forEach(key -> System.out.println(key + ": " + environmentVariables.getProperty(key)));
+        //environmentVariables.getKeys().forEach(key -> System.out.println(key + ": " + environmentVariables.getProperty(key)));
         baseUrl = EnvironmentSpecificConfiguration.from(environmentVariables).getProperty("webdriver.base.url");
     }
 }

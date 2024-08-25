@@ -24,7 +24,7 @@ Feature: Automation the functionality of booking an online ticket
     Given I navigate to the ERAIL website
     When I enter "Delhi" as the source station
     And I enter "Mumbai" as the destination station
-    And I enter "08-June" as booking date
+    And I enter "08-Sep-24" as booking date
     And I select "Senior Citizens/Lower Berth" as Quota
     And I select "1A - First AC" as train type
     Then I click on "Get Trains"
