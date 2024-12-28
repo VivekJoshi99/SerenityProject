@@ -127,7 +127,7 @@
         <version>3.0.0-M5</version>
         <configuration>
           <includes>
-            <include>**/TestRunnerSerenity/*.java</include>
+            <include>Runner/*.java</include>
           </includes>
           <skip>true</skip>
         </configuration>
