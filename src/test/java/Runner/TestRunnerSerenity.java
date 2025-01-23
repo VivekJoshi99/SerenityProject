@@ -25,7 +25,7 @@ import static io.cucumber.junit.platform.engine.Constants.*;
                 "pretty", "json:target/cucumber-reports/AutomationReport.json"
         },
         glue = "StepDefinitions",
-        features = "src/test/resources/features"
+        features = "src/test/resources/Features"
 )
 public class TestRunnerSerenity {
 }
