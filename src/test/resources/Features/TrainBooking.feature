@@ -27,9 +27,9 @@ Feature: Automation the functionality of booking an online ticket
 
   @smoke
   Scenario: Book an Online ticket for future customizable date
-    When I enter "Delhi" as the source station and selected 4 th entry
-    And I enter "Mumbai" as the destination station and selected 2 nd entry
-    And I enter "21-Dec-24" as booking date
+    When I enter "Delhi" as the source station and selected 2 th entry
+    And I enter "Mumbai" as the destination station and selected 1 nd entry
+    And I enter "21-Jul-25" as booking date
     And I select "Senior Citizens/Lower Berth" as Quota
     And I select "1A - First AC" as train type
     Then I click on "Get Trains"
